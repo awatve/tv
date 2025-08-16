@@ -1,3 +1,4 @@
+// update.js
 const fetch = require("node-fetch");
 const { writeFileSync } = require("fs");
 

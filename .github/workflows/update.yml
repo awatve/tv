@@ -37,7 +37,7 @@ jobs:
       - name: Commit and push changes
         run: |
           git add star_pravah_hd.m3u8
-          git commit -m "Auto-update Star Pravah HD playlist" || echo "No changes to commit"
+          git commit -m "Star Pravah HD" || echo "No changes to commit"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
 
       - name: Re-trigger workflow

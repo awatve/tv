@@ -1,14 +1,16 @@
 name: Update Star Pravah HD Playlist
 
+permissions:
+  contents: write    # <— important
+
 on:
   schedule:
-    - cron: "*/15 * * * *"   # every 15 minutes
-  workflow_dispatch:          # allows manual run
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
 
 jobs:
   update:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
 

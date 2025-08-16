@@ -1,7 +1,7 @@
 const fs = require('fs');
 const fetch = require('node-fetch'); // npm install node-fetch@2
 
-const INPUT_URL = 'https://cors-proxy.cooks.fyi/https://vishwas-oppu.vercel.app/play.m3u8?id=383034';
+const INPUT_URL = 'https://vishwas-oppu.vercel.app/play.m3u8?id=383034';
 const OUTPUT_FILE = 'star_pravah_hd.m3u8';
 const PROXY_PREFIX = 'https://cors-proxy.cooks.fyi/';
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
@@ -10,21 +10,22 @@ async function updatePlaylist() {
   try {
     const res = await fetch(INPUT_URL, {
       headers: {
-        'Authorization': `Bearer ${AUTH_TOKEN}`
-      }
+        'Authorization': `Bearer ${AUTH_TOKEN}`,
+        'User-Agent': 'Mozilla/5.0' // some servers require a UA
+      },
+      redirect: 'follow'
     });
 
     console.log("HTTP Status:", res.status, res.statusText);
-
-    if (!res.ok) {
-      throw new Error(`Failed to fetch playlist: ${res.status} ${res.statusText}`);
-    }
 
     const original = await res.text();
     console.log("Fetched playlist length:", original.length);
 
     if (!original || original.trim().length === 0) {
       console.error("❌ Playlist is empty. Aborting update.");
+      console.log("===== RAW PLAYLIST START =====");
+      console.log(original);
+      console.log("===== RAW PLAYLIST END =====");
       return;
     }
 

@@ -4,16 +4,18 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # manual trigger still possible
+  workflow_dispatch: # manual run possible
 
 jobs:
   update-playlist:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0  # full history for pull
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -28,21 +30,23 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-      - name: Commit playlist update
+      - name: Stage and commit playlist changes
         run: |
           git add star_pravah_hd.m3u8
-          git commit -m "Auto-update Star Pravah HD playlist" || echo "No playlist changes"
+          git commit -m "Auto-update Star Pravah HD playlist" || echo "No changes to commit"
 
-      - name: Touch timestamp (force rerun)
+      - name: Touch timestamp (force workflow rerun)
         run: |
           date > .timestamp
           git add .timestamp
           git commit -m "Trigger next workflow run" || echo "No timestamp change"
 
+      - name: Pull latest changes (rebase)
+        run: git pull origin main --rebase || true
+
       - name: Push changes
-        run: |
-          git pull origin main --rebase || true
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+        run: git push origin main

@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # manual run possible
+  workflow_dispatch:
 
 jobs:
   update-playlist:
@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0  # full history for pull
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -32,7 +32,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
       - name: Stage and commit playlist changes
         run: |
@@ -45,8 +44,9 @@ jobs:
           git add .timestamp
           git commit -m "Trigger next workflow run" || echo "No timestamp change"
 
-      - name: Pull latest changes (rebase)
+      - name: Pull latest changes
         run: git pull origin main --rebase || true
 
-      - name: Push changes
-        run: git push origin main
+      - name: Push changes using token
+        run: |
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main

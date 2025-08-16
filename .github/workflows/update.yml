@@ -1,54 +1,43 @@
-name: Sony SAB HD
+name: Star Pravah HD
 
 on:
   push:
     branches:
       - main
   workflow_dispatch:
-
-permissions:
-  contents: write  # ensures push permission is available
+  schedule:
+    - cron: '* * * * *'  # Every hour
 
 jobs:
   update-playlist:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # needed for rebasing
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install node-fetch@2
 
       - name: Run update script
+        env:
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
         run: node update.js
 
-      - name: Configure Git
+      - name: Commit updated playlist
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Stage and commit playlist changes
-        run: |
-          git add star_pravah_hd.m3u8
-          git commit -m "Sony SAB HD" || echo "No changes to commit"
-
-      - name: Touch timestamp (force workflow rerun)
-        run: |
-          date > .timestamp
-          git add .timestamp
-          git commit -m "Trigger next workflow run" || echo "No timestamp change"
-
-      - name: Pull latest changes
-        run: git pull origin main --rebase || true
-
-      - name: Push changes using PAT
-        run: |
-          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+          if git diff --quiet star_pravah_hd.m3u8; then
+            echo "ℹ️ No changes to commit."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git pull --rebase origin main
+            git add star_pravah_hd.m3u8
+            git commit -m "chore: star_pravah_hd.m3u8"
+            git push
+          fi

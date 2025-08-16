@@ -1,5 +1,4 @@
-// update.js (CommonJS version — works with Node 18)
-const fetch = require("node-fetch");   // must use require
+const fetch = require("node-fetch");
 const { writeFileSync } = require("fs");
 
 const SOURCE = "https://freelivtv.xyz/watchindia/gudu.php?id=63544";

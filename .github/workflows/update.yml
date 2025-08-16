@@ -1,19 +1,19 @@
-name: Update Star Pravah HD
+name: Update Star Pravah HD Playlist
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "* * * * *"   # safety schedule, every 5 mins
+  push:
+    branches:
+      - main
+  workflow_dispatch: # manual trigger still possible
 
 jobs:
-  update:
+  update-playlist:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0   # full history so pull works
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -31,19 +31,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Pull latest changes
-        run: git pull origin main --rebase
-
-      - name: Commit and push changes
+      - name: Commit playlist update
         run: |
           git add star_pravah_hd.m3u8
-          git commit -m "Star Pravah HD" || echo "No changes to commit"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+          git commit -m "Auto-update Star Pravah HD playlist" || echo "No playlist changes"
 
-      - name: Re-trigger workflow
+      - name: Touch timestamp (force rerun)
         run: |
-          curl -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/update.yml/dispatches \
-            -d '{"ref":"main"}'
+          date > .timestamp
+          git add .timestamp
+          git commit -m "Trigger next workflow run" || echo "No timestamp change"
+
+      - name: Push changes
+        run: |
+          git pull origin main --rebase || true
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main

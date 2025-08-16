@@ -6,6 +6,9 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: write  # ensures push permission is available
+
 jobs:
   update-playlist:
     runs-on: ubuntu-latest
@@ -14,8 +17,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
+          fetch-depth: 0  # needed for rebasing
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -47,6 +49,6 @@ jobs:
       - name: Pull latest changes
         run: git pull origin main --rebase || true
 
-      - name: Push changes using token
+      - name: Push changes using PAT
         run: |
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main

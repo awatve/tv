@@ -5,3 +5,7 @@
 #EXT-X-TARGETDURATION:11
 #EXTINF:10.760000,
 https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/5c0e26cb2e0a4351af7bcab04199928e/383034_0.ts
+#EXTINF:10.160000,
+https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/a14ba7cc26e2fbe69482186c8a28efe5/383034_1.ts
+#EXTINF:10.320000,
+https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/7bc3e600b760abb8b3b36774db13b1b0/383034_2.ts

@@ -1,7 +1,5 @@
-#EXTM3U
-#EXT-X-VERSION:3
-#EXT-X-MEDIA-SEQUENCE:0
-#EXT-X-ALLOW-CACHE:YES
-#EXT-X-TARGETDURATION:13
-#EXTINF:12.360000,
-https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/c0d4d8f9f70fb0a2807b2cb33248c299/383034_0.ts
+<HTML><HEAD><TITLE>Error</TITLE></HEAD><BODY>
+An error occurred while processing your request.<p>
+Reference&#32;&#35;219&#46;2addda17&#46;1755385427&#46;4e86d26
+<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;219&#46;2addda17&#46;1755385427&#46;4e86d26</P>
+</BODY></HTML>

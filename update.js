@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const { writeFileSync } = require("fs");
 
 const SOURCE = "https://tataplay.slivcdn.com/hls/live/2011749/SABHD/master_3500.m3u8";
-const PROXY  = "https://cors-proxy.cooks.fyi/";
+const PROXY  = "https://cors-proxy.cooks.fyi/https://tataplay.slivcdn.com/hls/live/2011749/SABHD/";
 
 async function updateM3U8() {
   try {

@@ -14,13 +14,23 @@ async function updatePlaylist() {
       }
     });
 
+    console.log("HTTP Status:", res.status, res.statusText);
+
     if (!res.ok) {
       throw new Error(`Failed to fetch playlist: ${res.status} ${res.statusText}`);
     }
 
     const original = await res.text();
+    console.log("Fetched playlist length:", original.length);
+
+    if (!original || original.trim().length === 0) {
+      console.error("❌ Playlist is empty. Aborting update.");
+      return;
+    }
+
     const lines = original.split(/\r?\n/);
 
+    // Prefix .ts segments with proxy
     const updatedLines = lines.map(line => {
       if (line.trim().endsWith('.ts')) {
         return PROXY_PREFIX + line.trim();
@@ -28,9 +38,7 @@ async function updatePlaylist() {
       return line;
     });
 
-    const output = updatedLines.join('\n');
-
-    // Only write file if actual segment list changed
+    // Only write file if segment list actually changed
     let oldContent = "";
     if (fs.existsSync(OUTPUT_FILE)) {
       oldContent = fs.readFileSync(OUTPUT_FILE, 'utf8');
@@ -40,13 +48,14 @@ async function updatePlaylist() {
     const newSegments = updatedLines.filter(l => l.endsWith('.ts'));
 
     if (JSON.stringify(oldSegments) !== JSON.stringify(newSegments)) {
-      fs.writeFileSync(OUTPUT_FILE, output, 'utf8');
+      fs.writeFileSync(OUTPUT_FILE, updatedLines.join('\n'), 'utf8');
       console.log(`✅ Playlist updated and written to ${OUTPUT_FILE}`);
     } else {
-      console.log("ℹ️ No segment changes detected. Skipping update.");
+      console.log("ℹ️ No .ts segment changes detected. File not updated.");
     }
+
   } catch (err) {
-    console.error('❌ Error:', err);
+    console.error('❌ Error:', err.message);
     process.exit(1);
   }
 }

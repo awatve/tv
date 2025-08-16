@@ -30,26 +30,34 @@ async function updatePlaylist() {
 
     const lines = original.split(/\r?\n/);
 
-    // Prefix .ts segments with proxy
+    // Prefix .ts segments with proxy only if not already prefixed
     const updatedLines = lines.map(line => {
-      if (line.trim().endsWith('.ts')) {
-        return PROXY_PREFIX + line.trim();
+      line = line.trim();
+      if (line.endsWith('.ts') && !line.startsWith(PROXY_PREFIX)) {
+        return PROXY_PREFIX + line;
       }
       return line;
     });
 
-    // Only write file if segment list actually changed
+    // Only write file if .ts segments actually changed
     let oldContent = "";
     if (fs.existsSync(OUTPUT_FILE)) {
       oldContent = fs.readFileSync(OUTPUT_FILE, 'utf8');
     }
 
-    const oldSegments = oldContent.split(/\r?\n/).filter(l => l.endsWith('.ts'));
-    const newSegments = updatedLines.filter(l => l.endsWith('.ts'));
+    const oldSegments = oldContent
+      .split(/\r?\n/)
+      .filter(l => l.endsWith('.ts'))
+      .map(l => l.trim());
+
+    const newSegments = updatedLines
+      .filter(l => l.endsWith('.ts'))
+      .map(l => l.trim());
 
     if (JSON.stringify(oldSegments) !== JSON.stringify(newSegments)) {
       fs.writeFileSync(OUTPUT_FILE, updatedLines.join('\n'), 'utf8');
       console.log(`✅ Playlist updated and written to ${OUTPUT_FILE}`);
+      console.log(`Segments: +${newSegments.length - oldSegments.length} -${oldSegments.length - newSegments.length}`);
     } else {
       console.log("ℹ️ No .ts segment changes detected. File not updated.");
     }

@@ -1,4 +1,5 @@
-const fetch = require("node-fetch");   // CommonJS style
+// update.js (CommonJS version — works with Node 18)
+const fetch = require("node-fetch");   // must use require
 const { writeFileSync } = require("fs");
 
 const SOURCE = "https://freelivtv.xyz/watchindia/gudu.php?id=63544";
@@ -10,7 +11,6 @@ async function updateM3U8() {
     if (!res.ok) throw new Error(`Failed to fetch source: ${res.status}`);
     let text = await res.text();
 
-    // Rewrite all segment URLs to go through the proxy
     const lines = text.split("\n").map(line => {
       if (line.startsWith("#") || line.trim() === "") return line;
       if (line.startsWith("http")) return PROXY + line;

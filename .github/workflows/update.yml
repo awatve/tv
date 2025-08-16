@@ -3,7 +3,7 @@ name: Update Star Pravah HD
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"   # safety schedule, every 5 mins
+    - cron: "* * * * *"   # safety schedule, every 5 mins
 
 jobs:
   update:

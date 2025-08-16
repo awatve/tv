@@ -2,12 +2,6 @@
 #EXT-X-VERSION:3
 #EXT-X-MEDIA-SEQUENCE:0
 #EXT-X-ALLOW-CACHE:YES
-#EXT-X-TARGETDURATION:12
-#EXTINF:11.440000,
-https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/faaf94b9f9ad2e2d91922f2638841b74/383034_0.ts
-#EXTINF:9.640000,
-https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/c3a8896fa33762ddfe339ce6f75da170/383034_1.ts
-#EXTINF:11.320000,
-https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/481ba467858cecea1fddafa8a8b362c2/383034_2.ts
-#EXTINF:8.440000,
-https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/45482586337fdc36e1c41044576155c8/383034_3.ts
+#EXT-X-TARGETDURATION:14
+#EXTINF:13.200000,
+https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/f8310e7cb4b1a03c566407191bd438e3/383034_0.ts

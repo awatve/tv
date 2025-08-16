@@ -38,7 +38,7 @@ jobs:
       - name: Stage and commit playlist changes
         run: |
           git add star_pravah_hd.m3u8
-          git commit -m "Auto-update Star Pravah HD playlist" || echo "No changes to commit"
+          git commit -m "Sony SAB HD" || echo "No changes to commit"
 
       - name: Touch timestamp (force workflow rerun)
         run: |

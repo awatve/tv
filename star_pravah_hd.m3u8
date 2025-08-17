@@ -3,5 +3,5 @@
 #EXT-X-MEDIA-SEQUENCE:0
 #EXT-X-ALLOW-CACHE:YES
 #EXT-X-TARGETDURATION:11
-#EXTINF:10.680000,
-https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/169aff37e592553c7e90c0e485a0fdbd/383034_0.ts
+#EXTINF:10.280000,
+https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/6ca70c8c4e8aaa40d86811e395b36b2e/383034_0.ts

@@ -1,5 +1,17 @@
-<HTML><HEAD><TITLE>Error</TITLE></HEAD><BODY>
-An error occurred while processing your request.<p>
-Reference&#32;&#35;219&#46;2addda17&#46;1755385427&#46;4e86d26
-<P>https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;219&#46;2addda17&#46;1755385427&#46;4e86d26</P>
-</BODY></HTML>
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-MEDIA-SEQUENCE:52
+#EXT-X-ALLOW-CACHE:YES
+#EXT-X-TARGETDURATION:12
+#EXTINF:10.720000,
+https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/8742eb6055ca363298f0d8c8729c4a31/383034_52.ts
+#EXTINF:10.200000,
+https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/198fd20c70bb5a7c0967b0db26eec2a0/383034_53.ts
+#EXTINF:9.960000,
+https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/c4796a434aabdacd572d46837c646c89/383034_54.ts
+#EXTINF:8.440000,
+https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/46cba4c54300445fbd5a1c864af59bd1/383034_55.ts
+#EXTINF:10.120000,
+https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/8c54c74c4da126ba2d7bd09d2fc4cddb/383034_56.ts
+#EXTINF:11.560000,
+https://cors-proxy.cooks.fyi/http://51.159.15.56:8080/hls/2cee31fc5dbf4fd2915ac84573bfba67/383034_57.ts

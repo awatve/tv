@@ -1,9 +1,9 @@
 const fs = require('fs');
 const fetch = require('node-fetch'); // npm install node-fetch@2
 
-const INPUT_URL = 'https://tataplay.slivcdn.com/hls/live/2011749/SABHD/master_3500.m3u8';
+const INPUT_URL = 'https://vishwas-oppu.vercel.app/play.m3u8?id=383034';
 const OUTPUT_FILE = 'star_pravah_hd.m3u8';
-const PROXY_PREFIX = 'https://cors-proxy.cooks.fyi/https://tataplay.slivcdn.com/hls/live/2011749/SABHD/';
+const PROXY_PREFIX = 'https://cors-proxy.cooks.fyi/';
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
 const MAX_SEGMENTS = 10; // keep only the last N segments for live update
 

@@ -1,9 +1,9 @@
 const fs = require('fs');
 const fetch = require('node-fetch'); // npm install node-fetch@2
 
-const INPUT_URL = 'https://streaming.sonyliv.com/show_sab_taarakmehtakaooltahchashmah_ep2896.m3u8';
+const INPUT_URL = 'https://streaming.sonyliv.com/show_sab_taarakmehtakaooltahchashmah_ep2896_3500K.m3u8';
 const OUTPUT_FILE = 'star_pravah_hd.m3u8';
-const PROXY_PREFIX = 'https://cors-proxy.cooks.fyi/';
+const PROXY_PREFIX = 'https://cors-proxy.cooks.fyi/https://streaming.sonyliv.com/';
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
 const MAX_SEGMENTS = 10; // keep only the last N segments for live update
 

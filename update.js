@@ -1,7 +1,7 @@
 const fs = require('fs');
 const fetch = require('node-fetch'); // npm install node-fetch@2
 
-const INPUT_URL = 'https://vishwas-oppu.vercel.app/play.m3u8?id=383034';
+const INPUT_URL = 'https://streaming.sonyliv.com/show_sab_taarakmehtakaooltahchashmah_ep2896.m3u8';
 const OUTPUT_FILE = 'star_pravah_hd.m3u8';
 const PROXY_PREFIX = 'https://cors-proxy.cooks.fyi/';
 const AUTH_TOKEN = process.env.AUTH_TOKEN;
